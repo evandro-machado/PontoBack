@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,5 +49,14 @@ public class PontoController {
 		pontoService.removerPonto(id);
 
 		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@CrossOrigin
+	@RequestMapping(method = RequestMethod.GET, value = "/pontos/oi", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Ponto> dizerOi() {
+		Ponto ponto = new Ponto();
+		ponto.setHoraEntrada("08:00");
+		ponto.setHoraSaida("18:00");
+		return new ResponseEntity<>(ponto, HttpStatus.OK);
 	}
 }

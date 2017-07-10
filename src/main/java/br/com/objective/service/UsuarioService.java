@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.objective.model.Ponto;
 import br.com.objective.model.Usuario;
 import br.com.objective.repository.UsuarioRepository;
 
@@ -19,6 +20,10 @@ public class UsuarioService {
 
 	public Usuario alterar(Usuario usuario) {
 		return usuarioRepository.save(usuario);
+	}
+	
+	public Usuario alterarHorario(Usuario usuario, Ponto ponto){
+		return usuarioRepository.updateHorario(usuario, ponto);
 	}
 
 	public List<Usuario> buscarUsuarios() {

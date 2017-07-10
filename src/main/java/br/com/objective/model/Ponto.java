@@ -1,22 +1,54 @@
 package br.com.objective.model;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 
 public class Ponto {
 
 	@Id
-	String id;
-	String horaEntrada;
-	String horaSaidaAlmoco;
-	String horaVoltaAlmoco;
-	String horaSaida;
-
-	public String getId() {
-		return id;
+	private ObjectId _id;
+	private int dia;
+	private int mes;
+	private int ano;
+	private String horaEntrada;
+	private String horaSaidaAlmoco;
+	private String horaVoltaAlmoco;
+	private String horaSaida;
+	
+	public Ponto(){
+        this._id = ObjectId.get();
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public ObjectId getId() {
+		return _id;
+	}
+
+	public void setId(ObjectId id) {
+		this._id = id;
+	}
+
+	public int getDia() {
+		return dia;
+	}
+
+	public void setDia(int dia) {
+		this.dia = dia;
+	}
+
+	public int getMes() {
+		return mes;
+	}
+
+	public void setMes(int mes) {
+		this.mes = mes;
+	}
+
+	public int getAno() {
+		return ano;
+	}
+
+	public void setAno(int ano) {
+		this.ano = ano;
 	}
 
 	public String getHoraEntrada() {
