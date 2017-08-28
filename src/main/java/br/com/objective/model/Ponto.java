@@ -2,7 +2,9 @@ package br.com.objective.model;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document
 public class Ponto {
 
 	@Id
@@ -14,9 +16,9 @@ public class Ponto {
 	private String horaSaidaAlmoco;
 	private String horaVoltaAlmoco;
 	private String horaSaida;
-	
-	public Ponto(){
-        this._id = ObjectId.get();
+
+	public Ponto() {
+		this._id = ObjectId.get();
 	}
 
 	public ObjectId getId() {

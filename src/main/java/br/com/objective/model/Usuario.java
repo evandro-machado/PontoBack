@@ -6,26 +6,27 @@ import org.springframework.data.annotation.Id;
 
 public class Usuario {
 	@Id
-	public String id;
+	public String _id;
 	public String nome;
 	public String sobreNome;
+	public String senha;
+	public String usuario;
 	public List<Ponto> horarios;
 
 	public Usuario() {
 	}
 
 	public Usuario(String nome, String sobreNome) {
-		super();
 		this.nome = nome;
 		this.sobreNome = sobreNome;
 	}
 
-	public String getId() {
-		return id;
+	public String get_id() {
+		return _id;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void set_id(String _id) {
+		this._id = _id;
 	}
 
 	public String getNome() {
@@ -44,6 +45,22 @@ public class Usuario {
 		this.sobreNome = sobreNome;
 	}
 
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
 	public List<Ponto> getHorarios() {
 		return horarios;
 	}
@@ -51,5 +68,5 @@ public class Usuario {
 	public void setHorarios(List<Ponto> horarios) {
 		this.horarios = horarios;
 	}
-	
+
 }

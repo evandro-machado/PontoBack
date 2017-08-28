@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +32,13 @@ public class UsuarioController {
 	public ResponseEntity<Usuario> buscarUsuarioPorId(@PathVariable String id) {
 		Usuario usuario = usuarioService.buscarUsuarioPorId(id);
 		return new ResponseEntity<>(usuario, HttpStatus.OK);
+	}
+
+	@CrossOrigin
+	@RequestMapping(method = RequestMethod.POST, value = "/usuarios/registro", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Usuario> registrarUsuario(@RequestBody Usuario usuario) {
+		Usuario usuarioRegistrado = usuarioService.inserir(usuario);
+		return new ResponseEntity<>(usuarioRegistrado, HttpStatus.CREATED);
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, value = "/usuarios", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

@@ -1,6 +1,7 @@
 package br.com.objective.controller;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,21 +23,29 @@ public class PontoController {
 	PontoService pontoService;
 
 	@RequestMapping(method = RequestMethod.GET, value = "/pontos", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Collection<Ponto>> buscarPontos() {
-		Collection<Ponto> pontosEncontrados = pontoService.buscarPontos();
+	public ResponseEntity<Collection<Ponto>> buscarPontos(BuscarPontosVO buscarPontosVO) {
+		List<Ponto> pontosEncontrados = pontoService.buscarPontosMesAno(buscarPontosVO);
 		return new ResponseEntity<>(pontosEncontrados, HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/pontos/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Ponto> buscarPontoPorId(@PathVariable String id) {
+	public ResponseEntity<Ponto> buscarPontosPorId(@PathVariable String id) {
 		Ponto ponto = pontoService.buscarPontoPorId(id);
 		return new ResponseEntity<>(ponto, HttpStatus.OK);
 	}
 
+	@CrossOrigin
+	@RequestMapping(method = RequestMethod.POST, value = "/pontos", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Ponto>> buscarPontosMesAno(@RequestBody BuscarPontosVO buscarPontosVO) {
+		List<Ponto> pontos = pontoService.buscarPontosMesAno(buscarPontosVO);
+		return new ResponseEntity<>(pontos, HttpStatus.OK);
+	}
+
+	@CrossOrigin
 	@RequestMapping(method = RequestMethod.PUT, value = "/pontos", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Ponto> alterarUsuario(@RequestBody Ponto ponto) {
-		Ponto pontoAtualizado = pontoService.alterar(ponto);
-		return new ResponseEntity<>(pontoAtualizado, HttpStatus.OK);
+	public ResponseEntity<Ponto> alterarUsuario(@RequestBody AlterarPontoVO alterarPontoVo) {
+		pontoService.alterar(alterarPontoVo);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE, value = "/pontos/{id}")
@@ -50,7 +59,7 @@ public class PontoController {
 
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
-	
+
 	@CrossOrigin
 	@RequestMapping(method = RequestMethod.GET, value = "/pontos/oi", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Ponto> dizerOi() {
