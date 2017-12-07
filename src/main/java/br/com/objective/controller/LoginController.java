@@ -60,7 +60,7 @@ public class LoginController {
 		String token = Jwts.builder()
 				.setSubject(usuarioStringJson)
 				.signWith(SignatureAlgorithm.HS512, "secret")
-				.setExpiration(new Date(System.currentTimeMillis() + 1 * 60 * 1000))
+				.setExpiration(new Date(System.currentTimeMillis() + 120 * 60 * 1000))
 				.compact();
 
 		return new LoginResponse(token);

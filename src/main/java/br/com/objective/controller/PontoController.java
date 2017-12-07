@@ -43,9 +43,9 @@ public class PontoController {
 
 	@CrossOrigin
 	@RequestMapping(method = RequestMethod.PUT, value = "/pontos", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Ponto> alterarUsuario(@RequestBody AlterarPontoVO alterarPontoVo) {
+	public ResponseEntity<String> alterarUsuario(@RequestBody AlterarPontoVO alterarPontoVo) {
 		pontoService.alterar(alterarPontoVo);
-		return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<>("", HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE, value = "/pontos/{id}")

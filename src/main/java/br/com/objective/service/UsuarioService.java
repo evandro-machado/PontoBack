@@ -65,10 +65,10 @@ public class UsuarioService {
 
 	private Ponto criarPonto(LocalDate date) {
 		Ponto ponto = new Ponto();
-		ponto.setHoraEntrada("08:00");
-		ponto.setHoraSaidaAlmoco("12:00");
-		ponto.setHoraVoltaAlmoco("13:00");
-		ponto.setHoraSaida("18:00");
+		ponto.setHoraEntrada("");
+		ponto.setHoraSaidaAlmoco("");
+		ponto.setHoraVoltaAlmoco("");
+		ponto.setHoraSaida("");
 		ponto.setDia(date.getDayOfMonth());
 		ponto.setMes(date.getMonthValue());
 		ponto.setAno(date.getYear());

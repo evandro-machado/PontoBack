@@ -1,14 +1,16 @@
 package br.com.objective;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import br.com.objective.controller.BuscarPontosVO;
 import br.com.objective.model.Ponto;
 import br.com.objective.model.Usuario;
 import br.com.objective.repository.UsuarioRepository;
@@ -31,35 +33,66 @@ public class PontoApplicationTests {
 	@Test
 	public void contextLoads() {
 		
-		Usuario usu = criarUsuario();
+//		Usuario usu = criarUsuario();
 		
-		Ponto ponto = criarPonto();
+//		Ponto ponto = criarPonto();
 		
-		Ponto ponto2 = criarPonto();
+//		Ponto ponto2 = criarPonto();
 		
-		List<Ponto> listaPontos = new ArrayList<>();
-		listaPontos.add(ponto);
-		listaPontos.add(ponto2);
+//		List<Ponto> listaPontos = new ArrayList<>();
+//		listaPontos.add(ponto);
+//		listaPontos.add(ponto2);
 		
-		usu.setHorarios(listaPontos);
+//		usu.setHorarios(listaPontos);
 		
-		usuarioService.inserir(usu);
+//		usuarioService.inserir(usu);
 		
 		Usuario usuarioRetorno = usuarioService.buscarUsuarios().get(0);
 		
-		Ponto pontoRetornado = usuarioRetorno.getHorarios().get(0);
+//		Ponto pontoRetornado = usuarioRetorno.getHorarios().get(1);
 
 		
 //		usuarioRetorno.getHorarios().clear();
-		pontoRetornado.setAno(2017);
-		pontoRetornado.setDia(25);
+//		pontoRetornado.setAno(2017);
+//		pontoRetornado.setDia(25);
 		
-		usuarioService.alterarHorario(usuarioRetorno, pontoRetornado);
+		BuscarPontosVO buscarPontosVo = new BuscarPontosVO();
+		
+		Ponto pt = new Ponto();
+		pt.setId(new ObjectId("599d9b0f798b612b18e7b3e1"));
+		pt.setAno(2017);
+		pt.setMes(9);
+		pt.setDia(30);
+		pt.setHoraEntrada("9:55");
+		pt.setHoraSaidaAlmoco("12:55");
+		pt.setHoraVoltaAlmoco("13:36");
+		pt.setHoraSaida("19:23");
+		List<Ponto> hrs = Arrays.asList(pt);
+		usuarioRetorno.setHorarios(hrs);
+		
+//		repository.upsert(usuarioRetorno);
+		repository.updateHorario(usuarioRetorno, pt);
+		
+//		buscarPontosVo.setAno(2017);
+//		buscarPontosVo.setIdUsuario(usuarioRetorno.get_id());
+//		buscarPontosVo.setMes(3);
+		
+//		usuarioService.buscarPontosMesAno(buscarPontosVo);
+		
+//		List<Ponto> pontosRetorno = repository.findByIdAndHorariosMesAndHorariosAnos(buscarPontosVo.getIdUsuario());
+//		List<Ponto> pontosRetorno = repository.buscarPorMesAno(buscarPontosVo.getIdUsuario());
+//		List<Ponto> pontosRetorno = repository.buscarPorMesAno(usuarioRetorno.get_id(), 3, 2017);
+//		List<Ponto> pontosRetorno = usuarioService.buscarPontosMesAno(buscarPontosVo);
+		
+//		System.out.println();
+//		usuarioService.alterarHorario(usuarioRetorno, pontoRetornado);
 //		usuarioRetorno.getHorarios().add(pontoRetornado);
 //		usuarioService.alterar(usuarioRetorno);
 //		System.out.println();
 		
-		repository.findBy_IdAndHorarios_Id(usuarioRetorno.getId(), pontoRetornado.getId().toString());
+//		repository.findByIdAndHorariosId(usuarioRetorno.getId(), pontoRetornado.getId().toString());
+//		repository.findByIdAndHorariosMesAndHorariosAnos(usuarioRetorno.getId(), 1, 2018);
+		
 		
 	}
 
